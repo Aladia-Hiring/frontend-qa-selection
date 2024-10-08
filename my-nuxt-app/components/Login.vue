@@ -16,7 +16,7 @@
 
   
             <!-- Email input section -->
-            <h4 class="mb-5 text-white text-center text-sm">Enter your email</h4>
+            <h4 class="mb-5 text-white text-center text-sm email">{{ email }}</h4>
             <div class="relative mb-5 m-4 mt-1">
                 <svg
                     fill="#5c5959"
@@ -88,10 +88,13 @@
     </div>
 </template>
   
-<script setup>
-    import { ref } from 'vue'
-
-    const email = ref('') 
+<script>
+    export default {
+        name: "Login",
+        props: {
+            email: String
+        }
+    }
 </script>
 
 <style scoped>
