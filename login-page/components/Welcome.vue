@@ -1,9 +1,9 @@
 
 <template>
-<div class="flex border m-4 mt-4 p-2 bg-black text-white  rounded-ld shadow-lg justify-between ">
+<div class="flex border mx-4 mt-4 p-2 bg-black text-white  rounded-ld shadow-lg justify-between ">
 <img
-class="m-4 object-cover"
-:src="'../assets/images/image.ChQ3biW9.png'"
+class=" object-cover w-20 h-20"
+src="~/assets/img/image.ChQ3biW9.png"
 
 />
 

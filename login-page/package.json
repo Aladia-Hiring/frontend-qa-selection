@@ -12,10 +12,12 @@
   "dependencies": {
     "@nuxtjs/storybook": "^8.3.1",
     "nuxt": "^3.13.0",
+    "nuxt-icons": "^3.2.1",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@iconify/vue": "^4.1.2",
     "@storybook/addon-essentials": "^8.3.5",
     "@storybook/addon-interactions": "^8.3.5",
     "@storybook/addon-links": "^8.3.5",
