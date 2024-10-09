@@ -14,7 +14,7 @@
   </template>
   
   <script>
-  import SignUpForm from '@/components/organisms/SignUpForm.vue';
+  import SignUpForm from '../Organisms/SignUpForm.vue';
   
   export default {
     components: {

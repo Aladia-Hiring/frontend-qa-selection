@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center justify-center min-h-screen bg-gray-900">
       <div class="bg-black bg-opacity-75 p-8 rounded-lg shadow-md w-full max-w-md">
-        <WelcomeHeader :logoSrc="/assets/images/aladia-logo.png" />
+        <WelcomeHeader />
         <InputField id="email" label="Email" placeholder="Email Address" v-model="email" />
         
         <div class="mb-6">

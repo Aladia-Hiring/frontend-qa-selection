@@ -1,10 +1,20 @@
 <template>
-    <div class="relative h-24 w-24 rounded border transition-all border-white/20 hover:border-white">
-      <img :src="src" class="absolute inset-0 h-full w-full rounded object-cover" />
-      <input type="file" accept="image/*" class="absolute inset-0 opacity-0" @change="uploadImage" />
-      <div class="absolute inset-0 flex items-end justify-center pb-4">
-        <div class="mb-1 text-sm font-semibold">Nice to meet you,</div>
-        <div class="text-xs text-white/70">Upload a profile picture and complete your presentation</div>
+     <div class="flex items-center justify-space-between w-full m-8">
+      <img
+      src="/assets/images/aladia-logo.png"
+      alt="Logo"
+      class="cursor-pointer w-20 h-20 object-cover rounded-full border border-white"
+      @click="triggerFileUpload"
+    />
+    <input
+      type="file"
+      ref="fileInput"
+      class="hidden"
+      @change="handleFileUpload"
+    />
+      <div class="text-white ml-4">
+        <h1 class="text-xl">{{ welcomeText }}</h1>
+        <p class="text-sm">{{ descriptionText }}</p>
       </div>
     </div>
   </template>
@@ -12,10 +22,23 @@
   <script>
   export default {
     props: {
-      src: { type: String, default: '/logo/image.png' },
+      // src: { type: String, default: '/logo/image.png' },
+      welcomeText:{
+        type:String,
+        default: "Nice to meet you"
+      
+
+      },
+      descriptionText:{
+        type:String,
+        default:"Upload a profile picture and complete your presentation"
+      }
     },
     methods: {
-      uploadImage(event) {
+      triggerFileUpload() {
+      this.$refs.fileInput.click();
+   },
+      handleFileUpload(event) {
         const file = event.target.files[0];
         if (file) {
           const reader = new FileReader();

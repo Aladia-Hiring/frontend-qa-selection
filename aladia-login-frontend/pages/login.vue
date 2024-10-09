@@ -1,6 +1,6 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-900">
-    <div class="bg-black bg-opacity-75 p-8 rounded-lg shadow-md w-full max-w-md">
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="bg-gray-950 bg-opacity-80 p-8 rounded-lg shadow-md w-full max-w-md">
       <WelcomeHeader logoSrc="./assets/images/aladia-logo.png" />
 
       <!-- Email input -->
@@ -58,13 +58,13 @@ export default {
     handleSubmit() {
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
       console.log(this.email);
-      if (regex.test(this.email)) {
+      // if (regex.test(this.email)) {
         // Redirect to signup page with email
         this.$router.push({ path: '/signup', query: { email: this.email } });
-      } else {
-        console.log(this.email);
-        alert('Please enter a valid email address.');
-      }
+      // } else {
+      //   console.log(this.email);
+      //   alert('Please enter a valid email address.');
+      // }
     },
   },
 };
