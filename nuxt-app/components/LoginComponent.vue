@@ -1,0 +1,276 @@
+<template>
+  <div class="login-container">
+    <div class="login-box">
+      <div class="header">
+        <img class="logo" src="../assets/aladia-logo.png" alt="Logo" />
+        <div class="header-text-container">
+            <h2>Welcome to Aladia,</h2>
+            <p>Create or access your account from here</p>
+        </div>
+      </div>
+
+      <!-- Input for email -->
+      <div class="email-input">
+        <label for="email">Enter your email</label>
+        <div class="input-container">
+          <img class="email-icon-img" src="../assets/message.png" alt="Email icon" />
+          <input type="email" id="email" required placeholder="Email Address" v-model="email" />
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <div class="submit">
+        <button @click="login">Enter</button>
+      </div>
+
+      <div class="or-divider">
+        <span>Or</span>
+      </div>
+
+      <!-- Social login buttons -->
+      <div class="social-buttons">
+        <button class="google" @click="loginWithGoogle">
+          <img src="../assets/google.svg" alt="Google icon" />
+          Continue with Google
+        </button>
+        <button class="facebook" @click="loginWithFacebook">
+          <img src="../assets/facebook.svg" alt="Facebook icon" />
+          Continue with Facebook
+        </button>
+        <button class="apple" @click="loginWithApple">
+          <img src="../assets/apple.svg" alt="Apple icon" />
+          Continue with Apple
+        </button>
+      </div>
+
+      <div class="terms">
+        <a href="#">Terms & Conditions</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      email: ''
+    };
+  },
+  methods: {
+    login() {
+      // Implement login logic here
+      console.log("Logging in with email:", this.email);
+    },
+    loginWithGoogle() {
+      // Implement Google login logic here
+      console.log("Logging in with Google");
+    },
+    loginWithFacebook() {
+      // Implement Facebook login logic here
+      console.log("Logging in with Facebook");
+    },
+    loginWithApple() {
+      // Implement Apple login logic here
+      console.log("Logging in with Apple");
+    }
+  }
+};
+</script>
+
+<style scoped>
+/* Container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121212;
+  
+}
+
+/* Login Box */
+.login-box {
+  background-color: #050505;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  width: 360px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+  border-style: solid;
+  border: 1px solid #fff;
+}
+
+/* Header */
+.header {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+    justify-content: space-between;
+}
+
+.header-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+}
+
+.logo {
+  height: 80px;
+  
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #fff;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+}
+
+p {
+  color: #aaa;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Email Input */
+.email-input {
+  margin: 20px 0;
+}
+
+.email-icon-img{
+    width: 20px;
+    height: 20px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2px;
+  padding-left: 8px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.input-container .icon {
+  margin-right: 10px;
+  color: #aaa;
+}
+#email {
+    color: #000;
+}
+
+.input-container input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  outline: none;
+}
+
+.input-container input::placeholder {
+  color: #777;
+}
+
+/* Submit Button */
+.submit button {
+  width: 100%;
+  padding: 12px;
+  background-color: #444;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit button:hover {
+  background-color: #555;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Divider */
+.or-divider {
+  margin: 20px 0;
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* Social Buttons */
+.social-buttons button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-buttons button img {
+  margin-right: 10px;
+  width: 20px;
+}
+
+.social-buttons .google {
+  background-color: #0A0A0A;
+  border: 1px solid #555555;
+}
+
+.social-buttons .facebook {
+  background-color: #0A0A0A;
+  border: 1px solid #555555;
+}
+
+.social-buttons .apple {
+  background-color: #0A0A0A;
+  border: 1px solid #555555;
+}
+
+.social-buttons button:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  background-color: #373737;
+}
+
+/* Terms */
+.terms {
+  margin-top: 40px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.terms a {
+  color: #777;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  color: #fff;
+}
+
+/* Styles for Mobile */
+@media (max-width: 768px) {
+  .login-box {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .email-input input,
+  .submit button,
+  .social-buttons button {
+    font-size: 14px;
+  }
+}
+</style>

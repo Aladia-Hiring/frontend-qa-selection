@@ -1,0 +1,31 @@
+{
+  "total": 1,
+  "totalPassed": 1,
+  "totalFailed": 0,
+  "totalSuites": 1,
+  "suites": [
+    {
+      "name": "login.spec.ts",
+      "path": "cypress/e2e/login.spec.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "login.spec.ts-Login Page",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/login.spec.ts",
+          "specFilename": "login.spec.ts",
+          "baselinePath": "cypress-image-diff-screenshots/baseline/login.spec.ts-Login Page.png",
+          "diffPath": "",
+          "comparisonPath": "cypress-image-diff-screenshots/comparison/login.spec.ts-Login Page.png"
+        }
+      ]
+    }
+  ],
+  "startedAt": "2024-10-09T15:11:34.499Z",
+  "endedAt": "2024-10-09T15:33:44.977Z",
+  "duration": 1308609,
+  "browserName": "electron",
+  "browserVersion": "118.0.5993.159",
+  "cypressVersion": "13.15.0"
+}
