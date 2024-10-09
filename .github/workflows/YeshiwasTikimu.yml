@@ -19,7 +19,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'  # Ensure Node.js is set up
+        node-version: '20.15.1'  # Ensure Node.js is set up
 
     - name: Install dependencies
       run: npm ci  # Install your project dependencies
