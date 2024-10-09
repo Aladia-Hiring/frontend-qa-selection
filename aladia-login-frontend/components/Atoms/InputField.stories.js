@@ -1,21 +1,14 @@
 import InputField from './InputField.vue';
 
-export default {
+const meta =  {
   title: 'Atoms/InputField',
   component: InputField,
-};
+  tags: ['autodocs'],
+}
 
-const Template = (args) => ({
-  components: { InputField },
-  setup() {
-    return { args };
-  },
-  template: '<InputField v-bind="args" />',
-});
+export default meta
 
-export const Default = Template.bind({});
-Default.args = {
-  id: 'email',
-  label: 'Email',
-  placeholder: 'Email Address',
-};
+export const InputFieldStory = {
+  args: {}
+}
+
