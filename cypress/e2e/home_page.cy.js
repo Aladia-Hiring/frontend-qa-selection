@@ -3,6 +3,8 @@ describe('Nuxt.js Home Page', () => {
       cy.visit('/');
       cy.contains('Welcome to Nuxt!');
       cy.contains('Welcome');
+      cy.contains('Welcome to');
+
 
     });
   });
