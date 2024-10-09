@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col items-center justify-center min-h-screen bg-black">
+    <div v-if="currentView === 'login'" class="login-form flex flex-col items-center justify-center min-h-screen bg-black">
         <!-- Box container -->
         <div class="w-[420px] h-[640px] bg-gradient-to-r from-zinc-800 via-slate-50 to-zinc-900 p-0.5 rounded-lg shadow-lg">
             <div class="w-full h-full bg-black rounded-lg p-5">
@@ -36,14 +36,20 @@
                 </svg>
                 <input
                 type="email"
+                name="email"
+                ref="emailInput"
                 placeholder="Email Address"
-                class="w-full p-2 pl-10 mb-8 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                class="w-full p-2 email-field pl-10 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
                 />
+
+                <div v-if="isEmailInvalid" class="text-red-500 text-xs" >
+                    Invalid Email
+                </div>
     
                 <!-- Enter button -->
-                <button class="w-full text-white py-2 rounded hover:bg-blue-500 mb-3"
+                <button class="w-full button mt-5 text-white py-2 rounded hover:bg-blue-500 mb-3"
                 style="background: linear-gradient(25deg, rgba(255, 255, 255, 0) 9.55%, rgba(255, 255, 255, 0) 30.28%, rgba(255, 246, 246, 0.1) 41.58%, rgba(255, 255, 255, 0) 59.02%, rgba(255, 255, 255, 0) 67.97%, rgba(255, 255, 255, 0.4) 74.56%, rgba(255, 255, 255, 0) 100%);"
-                >
+                @click="goToNewPage">
                 Enter
                 </button>
     
@@ -86,10 +92,95 @@
         </div>
         </div>
     </div>
+
+    <div v-else>
+
+        <div class="next-page flex flex-col items-center justify-center min-h-screen bg-black">
+            <!-- Box container -->
+            <div class="w-[420px] h-[640px] bg-gradient-to-r from-zinc-800 via-slate-50 to-zinc-900 p-0.5 rounded-lg shadow-lg">
+                <div class="w-full h-full bg-black rounded-lg p-5">
+                    <div class="text-white text-center cursor-pointer" @click="goToLogin">Back to Login</div>
+                    <!-- Image and text section -->
+                    <div class="flex h-[100px] mb-5 p-6 border border-custom-gray mt-3 custom-rounded" style="background: linear-gradient(25deg, rgba(255, 255, 255, 0) 9.55%, rgba(255, 255, 255, 0) 30.28%, rgba(246, 246, 246, 0.1) 49.58%, rgba(255, 255, 255, 0) 59.02%, rgba(255, 255, 255, 0) 67.97%, rgba(246, 246, 246, 0.1) 74.56%, rgba(255, 255, 255, 0) 100%);">
+                        <img src="../assets/header.png" alt="Random Image" class="w-24 h-24 object-cover pl-3 -mt-5" />
+                        <div class="text-white ml-4 mr-16 -mt-5"> 
+                            <h2 class="text-base font-semibold text-sm mb-2">Nice to meet you</h2> 
+                            <p class="text-custom-gray text-sm">Upload a profile picture
+                                and complete your
+                                presentation</p>
+                        </div>
+                    </div>
+                    <!-- Checkbox section -->
+                    <div class="flex justify-center items-center mt-4">
+                        <input type="checkbox" id="accept" v-model="accepted" class="mr-2">
+                        <label for="accept" class="text-white text-sm text-custom-gray">I accept <a class="text-white underline">Terms & Conditions</a> and <a class="text-white underline">Privacy Policy</a></label>
+                    </div>
+
+                    <div>
+                        <h2 class="text-center m-3 text-white text-xs">
+                            Enter your details
+                            <input
+                                type="name"
+                                placeholder="Name"
+                                class="w-full h-[40px] p-2 pl-10 mb-4 mt-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                            />
+                            <input
+                                type="surname"
+                                placeholder="Surname"
+                                class="w-full h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                            />
+                            <input
+                                type="email"
+                                :value="email"
+                                :disabled = true
+                                placeholder="Email Address"
+                                class="w-full h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                class="w-full h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                            />
+                            <input
+                                type="confirm-password"
+                                placeholder="Confirm Password"
+                                class="w-full h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                            />
+                            <button class="w-full text-white py-2 rounded hover:bg-blue-500 mb-3" style="background: linear-gradient(25deg, rgba(255, 255, 255, 0) 9.55%, rgba(255, 255, 255, 0) 30.28%, rgba(255, 246, 246, 0.1) 41.58%, rgba(255, 255, 255, 0) 59.02%, rgba(255, 255, 255, 0) 67.97%, rgba(255, 255, 255, 0.4) 74.56%, rgba(255, 255, 255, 0) 100%);">
+                                Enter
+                            </button>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
   
 <script>
     export default {
+        data(){
+            return {
+                isEmailInvalid: false,
+                currentView: 'login'
+        };
+        },
+        methods: {
+            validateEmail(email) {
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailPattern.test(email);
+            },
+            goToNewPage() {
+                const email = this.$refs.emailInput.value;
+                this.isEmailInvalid = !this.validateEmail(email);
+                if (!this.isEmailInvalid) {
+                    this.currentView = 'newPage';
+             }
+            },
+            goToLogin(){
+                this.currentView = 'login';
+            }
+        },
         name: "Login",
         props: {
             email: String

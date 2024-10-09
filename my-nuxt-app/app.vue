@@ -1,5 +1,5 @@
 <template>
-<Card title="hello"/>
+<Login />
 </template>
 
 <script setup>
