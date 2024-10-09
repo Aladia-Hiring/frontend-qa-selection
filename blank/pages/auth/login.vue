@@ -20,16 +20,23 @@
             class="email-input"
           />
         </div>
-  
+
+      
         <div class="component-container">
         
-        <button
-          type="button"
-          class="enter-button"
-        >
-          Enter
-        </button>
+          <button
+            type="button"
+            class="enter-button"
+          >
+            Enter
+          </button>
       
+        </div>
+
+        <div class="or-container">
+          <div class="or-line"></div>
+          <span >Or</span>
+          <div class="or-line"></div>
         </div>
   
         <div class="component-container">
@@ -59,7 +66,7 @@
             </div>
         </button>
         </div>
-        <a href="" class="terms">Terms & conditions</a>
+        <NuxtLink to="/" class="terms">Terms & conditions</NuxtLink>
       </div>
       
     </div>
@@ -72,19 +79,17 @@
 </script>
 
 <style lang="css" scoped>
-  h2 {
-    color: blue;
-  }
+  
   h1{
-    font-size: 0.85rem; /* text-xl */
-    color: white; /* text-white */
+    font-size: 0.85rem; 
+    color: white; 
   }
   .background {
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background-color: #1a202c; /* bg-gray-900 */
+      background-color: #1a202c; 
   }
   .surface {
     display: flex;
@@ -114,10 +119,26 @@
     gap: 4rem;
     align-items: center;
     margin-bottom: 1rem;
-    border: #626364 1px solid ;
+    border: 1px solid rgb(78, 77, 77);
+    background-color: rgb(15, 14, 14);
     padding: 1rem 1.5rem;
-    border-radius: 0.5rem;
+    padding-right: 1rem;
+    border-radius: 0.25rem;
 
+  }
+  .or-container {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: white;
+   
+  }
+  .or-line {
+    flex-grow: 1;
+    background-color: #d1d5db; /* border-gray-300 */
+    border-top: 1px solid #d1d5db; /* border-gray-300 */
   }
 
   .components-div {
@@ -152,8 +173,8 @@
       border: none;
       outline: none;
       &:focus {
-        border-color: #a3c5c1; /* focus:ring-yellow-500 */
-        box-shadow: 0 0 0 2px #a3c5c1;
+        border-color: #2c3131; /* focus:ring-yellow-500 */
+        box-shadow: 0 0 0 2px #2c3131;
       }
     }
 
@@ -164,7 +185,7 @@
       color: white;
       font-weight: 400;
       font-size: medium;
-      border: 1px gray solid;
+      border: 1px solid rgb(78, 77, 77);
       border-radius: 0.25rem;
       transition: background-color 0.3s;
       cursor: pointer;
@@ -184,7 +205,7 @@
       width: 90%;
       background-color: black;
       border: 1px solid rgb(78, 77, 77);
-      border-radius: 0.35rem;
+      border-radius: 0.25rem;
       color: white;
       display: flex;
       gap: 1rem;
@@ -200,7 +221,7 @@
       justify-content: center;
     }
 
-    a{
+    .terms{
       text-decoration: none;
       color: rgb(126, 122, 122);
       font-size: small;
