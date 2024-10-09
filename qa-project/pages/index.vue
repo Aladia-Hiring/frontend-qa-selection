@@ -127,7 +127,7 @@
               class="relative flex w-full justify-between transition-all duration-300 opacity-100"
             >
               <img
-                src="../../public/image.png"
+                src="../public/image.png"
                 class="h-20 w-20 object-cover"
               />
               <div>
@@ -263,7 +263,7 @@
               <div class="gradient absolute inset-0 opacity-20"></div>
               <img
                 class="absolute inset-0 h-full w-full rounded object-cover"
-                src="../../public/image.png"
+                src="../public/image.png"
               />
               <div class="absolute inset-0 flex items-end justify-center pb-4">
                
