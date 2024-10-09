@@ -1,0 +1,27 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@storybook-vue/nuxt": "^8.3.1",
+    "@storybook/addon-essentials": "^8.1.11",
+    "@storybook/addon-interactions": "^8.1.11",
+    "@storybook/addon-links": "^8.1.11",
+    "@storybook/builder-vite": "^8.3.5",
+    "@storybook/vue3": "^8.3.5",
+    "@storybook/vue3-vite": "^8.3.5",
+    "autoprefixer": "^10.4.20",
+    "cypress": "^13.15.0",
+    "cypress-image-diff-js": "^2.2.1",
+    "postcss": "^8.4.47",
+    "storybook": "^8.3.5",
+    "tailwindcss": "^3.4.13"
+  }
+}
