@@ -1,0 +1,38 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches:
+      - yosef-muluneh
+  pull_request:
+    branches:
+      - yosef-muluneh
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' 
+
+      - name: Install dependencies
+        run: |
+          pnpm install
+
+      - name: Build Storybook
+        run: pnpm run build-storybook
+
+      - name: Run Cypress tests
+        run: npx cypress run
+
+      - name: Publish Cypress dashboard
+        if: always()
+        run: npx cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
+
+      - name: Run Storybook Tests
+        run: pnpm run test-storybook # Adjust if you have a specific command for Storybook tests
