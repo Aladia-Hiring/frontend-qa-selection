@@ -1,7 +1,7 @@
 describe('Login View Email Validation', () => {
     beforeEach(() => {
       // Visit the page that contains the login view
-      cy.visit('http://localhost:3001/');  // Adjust the URL path if needed
+      cy.visit('http://localhost:3000/');  // Adjust the URL path if needed
     });
   
     it('should display next page content when a valid email is entered', () => {

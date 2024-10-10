@@ -1,6 +1,6 @@
 describe('template spec', () => {
   it('valid email', () => {
-    cy.visit('http://localhost:3001/')
+    cy.visit('http://localhost:3000/')
 
 
     /* ==== Generated with Cypress Studio ==== */
@@ -13,7 +13,7 @@ describe('template spec', () => {
  
   it('invalid email', function() {
     /* ==== Generated with Cypress Studio ==== */
-    cy.visit('http://localhost:3001/');
+    cy.visit('http://localhost:3000/');
     cy.get('.email-field').type('someone');
     cy.get('.button').click();
     /* ==== End Cypress Studio ==== */

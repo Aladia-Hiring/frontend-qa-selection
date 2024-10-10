@@ -37,6 +37,7 @@
                 <input
                 type="email"
                 name="email"
+                :value="emailValue"
                 ref="emailInput"
                 placeholder="Email Address"
                 class="w-full p-2 email-field pl-10 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
@@ -93,7 +94,7 @@
         </div>
     </div>
 
-    <div v-else>
+    <div v-if = "currentView == 'newPage'">
 
         <div class="next-page flex flex-col items-center justify-center min-h-screen bg-black">
             <!-- Box container -->
@@ -113,44 +114,107 @@
                     <!-- Checkbox section -->
                     <div class="flex justify-center items-center mt-4">
                         <input type="checkbox" id="accept" v-model="accepted" class="mr-2">
-                        <label for="accept" class="text-white text-sm text-custom-gray">I accept <a class="text-white underline">Terms & Conditions</a> and <a class="text-white underline">Privacy Policy</a></label>
+                        <label for="accept" :class="{'text-red-500 text-sm': !accepted && submitClicked, 'text-white text-sm': accepted || !submitClicked}">I accept <a class="text-white underline">Terms & Conditions</a> and <a class="text-white underline">Privacy Policy</a></label>
                     </div>
 
                     <div>
                         <h2 class="text-center m-3 text-white text-xs">
                             Enter your details
                             <input
-                                type="name"
+                                type="text"
+                                :value="name"
+                                @input="$emit('update:name', $event.target.value)"
                                 placeholder="Name"
-                                class="w-full h-[40px] p-2 pl-10 mb-4 mt-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                                class="w-full name-field mt-4 h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
                             />
                             <input
-                                type="surname"
+                                type="text"
+                                :value="surname"
+                                @input="$emit('update:surname', $event.target.value)"
                                 placeholder="Surname"
-                                class="w-full h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                                class="w-full surname-field h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
                             />
                             <input
                                 type="email"
-                                :value="email"
-                                :disabled = true
+                                :value="emailValue"
+                                :disabled="true"
+                                @input="$emit('update:emailValue', $event.target.value)"
                                 placeholder="Email Address"
-                                class="w-full h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                                class="w-full email- h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
                             />
                             <input
                                 type="password"
+                                :value="password"
+                                @input="$emit('update:password', $event.target.value)"
                                 placeholder="Password"
-                                class="w-full h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                                class="w-full password-field h-[40px] p-2 pl-10 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
                             />
+                            <div v-if="passwordWeak" :class="{'text-red-500 text-xs text-left': !isStrong, 'text-green-500 text-xs text-left': isStrong}">
+                                {{  passwordWeakError }}
+                            </div>
                             <input
-                                type="confirm-password"
+                                type="password"
+                                :value="confirm"
+                                @input="$emit('update:confirm', $event.target.value)"
                                 placeholder="Confirm Password"
-                                class="w-full h-[40px] p-2 pl-10 mb-4 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
+                                class="w-full confirm-field h-[40px] mt-4 p-2 pl-10 border border-gray-600 rounded bg-white text-black focus:outline-none focus:border-blue-500"
                             />
-                            <button class="w-full text-white py-2 rounded hover:bg-blue-500 mb-3" style="background: linear-gradient(25deg, rgba(255, 255, 255, 0) 9.55%, rgba(255, 255, 255, 0) 30.28%, rgba(255, 246, 246, 0.1) 41.58%, rgba(255, 255, 255, 0) 59.02%, rgba(255, 255, 255, 0) 67.97%, rgba(255, 255, 255, 0.4) 74.56%, rgba(255, 255, 255, 0) 100%);">
+                            <div v-if="passwordMismatch" class="text-red-500 text-xs text-left">
+                                Passwords don't match
+                            </div>
+                            <button @click="handleSubmit" class="w-full text-white py-2 mt-6 rounded hover:bg-blue-500 mb-3" style="background: linear-gradient(25deg, rgba(255, 255, 255, 0) 9.55%, rgba(255, 255, 255, 0) 30.28%, rgba(255, 246, 246, 0.1) 41.58%, rgba(255, 255, 255, 0) 59.02%, rgba(255, 255, 255, 0) 67.97%, rgba(255, 255, 255, 0.4) 74.56%, rgba(255, 255, 255, 0) 100%);">
                                 Enter
                             </button>
                         </h2>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-if="currentView === 'code'" class="login-form flex flex-col items-center justify-center min-h-screen bg-black">
+        <!-- Box container -->
+        <div class="w-[420px] h-[640px] bg-gradient-to-r from-zinc-800 via-slate-50 to-zinc-900 p-0.5 rounded-lg shadow-lg">
+            <div class="w-full h-full bg-black rounded-lg p-5">
+                <div class="flex flex-col items-center justify-center mb-5 p-6 custom-rounded">
+                    <img src="../assets/header.png" alt="Random Image" class="w-28 h-28 object-cover pl-3" />
+                    <div class="text-white mt-4"> 
+                        <h2 class="text-base text-center font-semibold text-lg mb-2">Frank Fira</h2> 
+                        <p class="text-custom-gray text-sm text-center">Thanks for joining Aladia.</p>
+                        <p class="text-custom-gray text-sm mt-8 text-center">Please enter below the 6-digit code we sent you through your registration e-mail:</p>
+
+                    </div>
+                    <div class="flex justify-center items-center mt-24 gap-5">
+                        <input type="text" class="number-input" maxlength="1" @input="limitInput($event)" />
+                        <input type="text" class="number-input" maxlength="1" @input="limitInput($event)" />
+                        <input type="text" class="number-input" maxlength="1" @input="limitInput($event)" />
+                        <input type="text" class="number-input" maxlength="1" @input="limitInput($event)" />
+                        <input type="text" class="number-input" maxlength="1" @input="limitInput($event)" />
+                        <input type="text" class="number-input" maxlength="1" @input="limitInput($event)" />
+                    </div>
+
+                    <a class='text-white text-xs mt-6 text-custom-gray cursor-pointer'>You didn't receive any mail?</a>
+                    <button @click="verifyCode" class=" mt-16 w-full text-white py-2 mt-6 rounded hover:bg-blue-500 mb-3" style="background: linear-gradient(25deg, rgba(255, 255, 255, 0) 9.55%, rgba(255, 255, 255, 0) 30.28%, rgba(255, 246, 246, 0.1) 41.58%, rgba(255, 255, 255, 0) 59.02%, rgba(255, 255, 255, 0) 67.97%, rgba(255, 255, 255, 0.4) 74.56%, rgba(255, 255, 255, 0) 100%);">
+                        Enter
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div v-if="currentView === 'done'" class="login-form flex flex-col items-center justify-center min-h-screen bg-black">
+        <!-- Box container -->
+        <div class="w-[420px] h-[640px] bg-gradient-to-r from-zinc-800 via-slate-50 to-zinc-900 p-0.5 rounded-lg shadow-lg">
+            <div class="w-full h-full bg-black rounded-lg p-5">
+                <div class="flex flex-col items-center justify-center mb-5 p-6 custom-rounded">
+                    <div class="text-white mt-4"> 
+                        <h2 class="text-base text-center font-semibold text-lg mb-2">Frank Fira</h2> 
+                        <p class="text-custom-gray text-sm text-center">Thanks for joining Aladia.</p>
+                    </div>
+                    <img src="../assets/header.png" alt="Random Image" class=" mt-20 w-28 h-28 object-cover pl-3" />
+                    <button class="w-full text-white py-2 mt-40 rounded hover:bg-blue-500 mb-3" style="background: linear-gradient(25deg, rgba(255, 255, 255, 0) 9.55%, rgba(255, 255, 255, 0) 30.28%, rgba(255, 246, 246, 0.1) 41.58%, rgba(255, 255, 255, 0) 59.02%, rgba(255, 255, 255, 0) 67.97%, rgba(255, 255, 255, 0.4) 74.56%, rgba(255, 255, 255, 0) 100%);">
+                        Enter Marketplace
+                    </button>
                 </div>
             </div>
         </div>
@@ -162,18 +226,51 @@
         data(){
             return {
                 isEmailInvalid: false,
-                currentView: 'login'
+                currentView: 'login',
+                passwordWeakError: '',
+                accepted: false,
+                submitClicked: false, 
+                isStrong: false
+                
         };
         },
         methods: {
+            handleSubmit() {
+                if(this.emailValue, this.name, this.surname, this.password, this.confirm){
+                    this.submitClicked = true;
+                    this.currentView = 'code' 
+                }
+
+            },
+            verifyCode(){
+                this.currentView = 'done'
+            },
+
+            limitInput(event) {
+                const value = event.target.value;
+
+                const digitOnly = value.replace(/\D/g, '');
+
+                event.target.value = digitOnly;
+
+                if (digitOnly.length > 1) {
+                    event.target.value = digitOnly.charAt(0); 
+                }
+            },
+
             validateEmail(email) {
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return emailPattern.test(email);
             },
             goToNewPage() {
                 const email = this.$refs.emailInput.value;
+                
+                console.log(typeof email)
+                console.log(typeof this.emailValue)
+   
                 this.isEmailInvalid = !this.validateEmail(email);
                 if (!this.isEmailInvalid) {
+                    this.$emit('update:emailValue', email);
                     this.currentView = 'newPage';
              }
             },
@@ -183,7 +280,62 @@
         },
         name: "Login",
         props: {
-            email: String
+            emailValue: {
+                type: String,
+                required: true,
+            },
+            name: {
+                type: String,
+                required: true,
+            },
+            surname: {
+                type: String,
+                required: true,
+            },
+            password: {
+                type: String,
+                required: true,
+            },
+            confirm: {
+                type: String,
+                required: true,
+            },
+        },
+        computed: {
+            passwordMismatch() {
+                return this.password && this.confirm && this.password !== this.confirm;
+            },
+            passwordWeak() {
+                if (this.password.length > 0 && this.password.length < 8) {
+                    this.passwordWeakError = '8 character minimum';
+                    this.isStrong = false;
+                    return true;
+                }
+                if (this.password.length > 0 && !/[A-Z]/.test(this.password)) {
+                    this.passwordWeakError = 'Upper case letter required';
+                    this.isStrong = false;
+                    return true;
+                }
+                if (this.password.length > 0 && !/\d/.test(this.password)) {
+                    this.passwordWeakError = 'Number required';
+                    this.isStrong = false;
+                    return true;
+                }
+                if (this.password.length > 0 && !/[!@#$%^&*(),.?":{}|<>]/.test(this.password)) {
+                    this.passwordWeakError = 'Symbol required(@$!%*?&)';
+                    this.isStrong = false;
+                    return true;
+                }
+                
+                // If all conditions pass, the password is not weak
+                if (this.password.length > 0){
+                    this.passwordWeakError = 'Strong Password'
+                    this.isStrong = true;
+                    return true
+                }
+                this.passwordWeakError = ''
+                return true;
+                },
         }
     }
 </script>
@@ -200,5 +352,16 @@
         color: #909090; 
         font-weight: 600;
     }
+    .number-input {
+    width: 40px;
+    height: 40px; 
+    text-align: center; 
+    margin: 0;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 16px; 
+}
+
+
 </style>
   
