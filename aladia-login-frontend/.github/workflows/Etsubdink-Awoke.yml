@@ -1,0 +1,44 @@
+name: CI/CD for Etsubdink-Awoke Branch
+
+on:
+  push:
+    branches:
+      - Etsubdink-Awoke  
+  pull_request:
+    branches:
+      - Etsubdink-Awoke
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.18.0'  # Ensure Node.js is set up
+
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Run tests
+      run: npm test
+
+    - name: Start your app
+      run: npm run dev &  # Start your Nuxt.js app (adjust as needed)
+      env:
+        HOST: localhost
+        PORT: 3000
+    
+    - name: Wait for the app to be ready
+      run: npx wait-on http://localhost:3000  # Wait until your app is ready before running tests
+
+    - name: Run Cypress tests
+      run: npx cypress run
+    
