@@ -12,5 +12,5 @@ const props = defineProps({
 </script>
 
 <template>
-  <p :class="`text-${props.size}`">{{ props.text }}</p>
+  <p :class="`text-${props.size}`" class="text-white">{{ props.text }}</p>
 </template>

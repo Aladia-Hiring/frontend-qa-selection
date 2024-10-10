@@ -1,0 +1,33 @@
+<script setup>
+import Button from "../button/Button.vue";
+import FedButton from "../button/FedButton.vue";
+import Link from "../button/Link.vue";
+import LoginHeader from "../header/LoginHeader.vue";
+import Text from "../text/Text.vue";
+import TextInputWithIcon from "../textinput/TextInputWithIcon.vue";
+</script>
+
+<template>
+  <div
+    class="fixed flex flex-col items-center justify-center bg-black text-white shadow-lg elevation-10 border-2 border-white/10 rounded-lg p-4"
+  >
+    <LoginHeader />
+
+    <div class="flex flex-col gap-2 w-full items-center mt-4">
+      <Text text="Enter you email" size="lg" />
+      <TextInputWithIcon placeholder="Email" />
+      <Button label="Enter" />
+    </div>
+
+    <div class="flex items-center justify-center w-full mt-4">
+      <Text text="Or" />
+    </div>
+
+    <div class="flex flex-col gap-2 w-full justify-start mt-4">
+      <FedButton name="Google" />
+      <FedButton name="Facebook" />
+      <FedButton name="Apple" />
+    </div>
+    <Link text="Terms and Conditions" />
+  </div>
+</template>
