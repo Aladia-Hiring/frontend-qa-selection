@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-center mb-6 border border-white bg-black p-4 rounded-lg">
+    <div class="gradient inset-0 bg-black flex items-center justify-center mb-6 border border-white bg-black p-4 rounded-lg">
       <Logo
       :src="logoSrc"
       :welcomeText = "welcomeText"

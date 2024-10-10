@@ -14,7 +14,7 @@
     props: {
       buttonClass: {
         type: String,
-        default: 'bg-gradient-to-r from-gray-950 to-black text-white font-semibold rounded-lg hover:bg-gray-900 transition duration-300',
+        default: 'flex cursor-pointer items-center justify-center gap-4 rounded border border-white/20 py-1.5 shadow-[0px_3px_6px_#00000000] transition-all hover:bg-white/20 hover:shadow-[0px_3px_6px_#000000] active:scale-95 mb-4',
       },
     },
 

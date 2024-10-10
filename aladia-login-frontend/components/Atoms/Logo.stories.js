@@ -2,7 +2,7 @@ import Logo from "./Logo.vue"
 
 const meta = {
     title: "Atoms/Logo",
-    components: Logo,
+    component: Logo,
     tags: ["autodocs"]
 }
 

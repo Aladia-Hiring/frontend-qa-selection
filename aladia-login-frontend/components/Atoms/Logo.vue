@@ -1,11 +1,21 @@
 <template>
-    <div class="flex items-center justify-space-between mb-4 w-full">
-      <img src="/assets/images/aladia-logo.png" alt="Logo" class="mx-auto w-16 h-16" />
-      <div class="text-white ml-4">
-        <h1 class="text-xl">{{ welcomeText }}</h1>
-        <p class="text-sm">{{ descriptionText }}</p>
-      </div>
+    <div class="flex justify-between gradient inset-0 ">
+
+      <div class="relative flex w-full justify-between transition-all duration-300 opacity-100 mr-4">
+        <img src="/assets/images/aladia-logo.png" alt="Logo" class="h-20 w-20 object-cover" />
+      
+      <div class = "ml-8">
+        <div class="mb-2 text-base font-semibold">
+          Welcome to Aladia,
+        </div>
+        <div class="text-white/70"> 
+          Create or access your <br> 
+          account from here </div>
+        </div>
+     
     </div>
+  </div>
+    
   </template>
   
   

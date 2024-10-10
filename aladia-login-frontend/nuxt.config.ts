@@ -11,12 +11,16 @@ export default defineNuxtConfig({
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
+      
     },
   },
 
   // Add Storybook module for Nuxt
   modules: [
     '@nuxtjs/storybook',
+  ],
+  plugins: [
+    '~/plugins/fontawesome.js', 
   ],
   
 
