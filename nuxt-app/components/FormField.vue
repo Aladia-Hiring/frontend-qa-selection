@@ -4,17 +4,18 @@
         :label="label" 
         :placeholder="placeholder" 
         :icon="icon" 
-        :value="modelValue" 
-        @input="updateValue"
+        v-model="childValue"
+        inputClass="padding--x-20 padding--x-10"
       />
     </div>
-  </template>
+</template>
   
   <script>
   import TextInput from './TextInput.vue';
   
   export default {
     components: { TextInput },
+    emits: ['update:modelValue'],
     props: {
       label: String,
       placeholder: String,
@@ -26,6 +27,17 @@
         this.$emit('update:modelValue', value);
       },
     },
+
+    computed: {
+      childValue: {
+        get() {
+          return this.modelValue;
+        },
+        set(value) {
+          this.$emit('update:modelValue', value);
+        },
+      },
+  },
   };
   </script>
   

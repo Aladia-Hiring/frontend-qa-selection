@@ -16,6 +16,13 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   label: 'I accept Terms & Conditions and Privacy Policy',
+  modelValue: true,
+};
+
+
+export const Marked = Template.bind({})
+Marked.args = {
+  label: 'I don\'t accept Terms & Conditions and Privacy Policy',
   modelValue: false,
 };
 

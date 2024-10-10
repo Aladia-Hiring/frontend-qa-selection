@@ -9,8 +9,8 @@
         </div>
       </div>
 
-      <EmailInput v-model:email="email" />
-      <SubmitButton @login="login" />
+      <TextInput v-model="email"  lable="Enter your email" placeholder="Email Address"/>
+      <Button @click="login" >Enter </Button>
 
       <div class="or-divider">
         <span>Or</span>
@@ -20,6 +20,9 @@
         @loginWithGoogle="loginWithGoogle"
         @loginWithFacebook="loginWithFacebook"
         @loginWithApple="loginWithApple"
+        :googleDisabled ="googleDisabled"
+        :facebookDisabled="facebookDisabled"
+        :appleDisabled="appleDisabled"
       />
 
       <div class="terms">
@@ -30,31 +33,29 @@
 </template>
 
 <script>
-import EmailInput from '../components/EmailInput.vue';
-import SubmitButton from '../components/SubmitButton.vue';
-import SocialLoginButton from '../components/SocialLoginButton.vue';
+import TextInput from './TextInput.vue';
+import Button from './Button.vue';
+import SocialLoginButton from './SocialLoginButtons.vue';
 
 export default {
   components: {
-    EmailInput,
-    SubmitButton,
+    TextInput,
+    Button,
     SocialLoginButton
   },
   data() {
     return {
-      email: ''
+      email: '',
+      googleDisabled:false,
+      facebookDisabled:false,
+      appleDisabled:false,
     };
   },
   methods: {
     async login() {
       console.log("Logging in with email:", this.email);
-      
-      const emailExists = await this.checkEmailExists(this.email);
-
-      if (emailExists) {
-        this.$router.push('/dashboard');
-      } else {
-        this.$router.push('/signup'); 
+      if (this.email !== "") {
+        this.$emit('login', this.email); // Emit the email to the parent component
       }
     },
     checkEmailExists(email) {
@@ -80,7 +81,6 @@ export default {
 
   
   <style scoped>
-  /* Container */
   .login-container {
     display: flex;
     justify-content: center;
@@ -90,7 +90,6 @@ export default {
     
   }
   
-  /* Login Box */
   .login-box {
     background-color: #050505;
     padding: 40px;
@@ -103,7 +102,6 @@ export default {
     border: 1px solid #fff;
   }
   
-  /* Header */
   .header {
     margin-bottom: 20px;
     display: flex;

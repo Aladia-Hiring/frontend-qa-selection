@@ -1,0 +1,1 @@
+import{d as r,e as o,f as s}from"./ZGuGZTyI.js";import{_ as a}from"./DlAUqK2U.js";const t={},n={class:"wrapper"};function c(d,e){return r(),o("div",n,e[0]||(e[0]=[s("h1",null,"dashboard page",-1)]))}const p=a(t,[["render",c]]);export{p as default};

@@ -18,6 +18,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        background:black;
+        height:100vh;
+        color:white;
     }
   </style>
   
