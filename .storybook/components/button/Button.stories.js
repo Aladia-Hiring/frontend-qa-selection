@@ -1,7 +1,7 @@
 import Button from "./Button.vue";
 
 export default {
-  title: "Components/Button",
+  title: "Molecules/Button",
   component: { Button },
   argTypes: {
     label: { control: "text" },

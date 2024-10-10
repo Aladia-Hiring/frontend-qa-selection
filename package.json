@@ -12,6 +12,7 @@
     "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
+    "@nuxt/icon": "^1.5.5",
     "@nuxtjs/storybook": "^8.3.1",
     "nuxt": "^3.13.0",
     "vue": "latest",
