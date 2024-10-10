@@ -26,6 +26,7 @@
               required
             />
             <p v-if="errors.email" class="error-text">{{ errors.email }}</p>
+          <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
             
           </div>
 
@@ -41,7 +42,6 @@
               Enter
             </button>
           </div>
-          <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
 
           <!-- Or separator -->
           <div class="or-container">
@@ -118,6 +118,7 @@ const loading = ref(false) // To manage loading state of the form
 // Function to handle form submission
 const onSubmit = () => {
 
+
   // Validate email before submission
   if (!form.email) {
     errors.email = 'Email is required.'
@@ -142,8 +143,7 @@ const onSubmit = () => {
     setTimeout(() => {
       loading.value = false
       console.log('Form submitted successfully:', form)
-      successMessage.value = 'Form submitted successfully'
-      
+      successMessage.value = ''
       // Clear form fields after submission
       form.email = ''
     }, 2000)
@@ -159,11 +159,11 @@ const isValidEmail = (email: string): boolean => {
 // Function to validate email input as user types
 const validateEmail = () => {
   if (!isValidEmail(form.email)) {
-    errors.email = 'Invalid email format.'
+    errors.email = 'Invalid email address.'
     // clear after 1.5 seconds
     setTimeout(()=>{
       errors.email = ''
-    },1500)
+    },4000)
   } else {
     errors.email = ''
   }
