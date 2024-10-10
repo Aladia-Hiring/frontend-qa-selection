@@ -1,84 +1,156 @@
 <template>
-    <div class="background">
-      <div class="surface">
-        <div class="header-box">
-          <img src="../assets/images/aladia-logo.jpg" alt="Logo" class="aladia-logo" />
-          <div>
-            <h1>Welcome to Aladia</h1>
-            <p class="info-text">Create or access your account from here</p>
-          </div>
+  <div class="background">
+    <div class="surface">
+      <div class="header-box">
+        <img src="../assets/images/aladia-logo.jpg" alt="Logo" class="aladia-logo" />
+        <div>
+          <h1>Welcome to Aladia</h1>
+          <p class="info-text">Create or access your account from here</p>
         </div>
-        
+      </div>
+
+      <!-- Form starts here -->
+      <form @submit.prevent="onSubmit" novalidate>
         <div class="components-div">
-  
+          <!-- Email input -->
           <div class="component-container">
             <label for="email" class="email-label">Enter your email</label>
             <input
+              v-model="form.email"
               id="email"
               type="email"
               placeholder="Email Address"
               class="email-input"
+              @input="validateEmail"
+              :class="{ 'input-error': errors.email }"
+              required
             />
+            <p v-if="errors.email" class="error-text">{{ errors.email }}</p>
           </div>
-  
-        
+
+          <!-- Submit button -->
           <div class="component-container">
-          
-            <button
-              type="button"
-              class="enter-button"
-            >
+            <button type="submit" class="enter-button" :disabled="loading">
               Enter
             </button>
-        
           </div>
-  
+
+          <!-- Or separator -->
           <div class="or-container">
             <div class="or-line"></div>
-            <span >Or</span>
+            <span>Or</span>
             <div class="or-line"></div>
           </div>
-    
+
+          <!-- Social buttons -->
           <div class="component-container">
-            <button class="link-btns">
+            <button type="button" class="link-btns" @click="handleGoogleLogin">
               <div class="img-text-cont">
-  
                 <img src="../assets/images/google.jpeg" alt="Google" class="symbol-imgs" />
                 Continue with Google
               </div>
-          </button>
+            </button>
           </div>
-    
+
           <div class="component-container">
-            <button class="link-btns">
+            <button type="button" class="link-btns" @click="handleFacebookLogin">
               <div class="img-text-cont">
                 <img src="../assets/images/facebook.png" alt="facebook" class="symbol-imgs" />
-                Continue with facebook
+                Continue with Facebook
               </div>
-          </button>
+            </button>
           </div>
-  
+
           <div class="component-container">
-            <button class="link-btns">
+            <button type="button" class="link-btns" @click="handleAppleLogin">
               <div class="img-text-cont">
-                <img src="../assets/images/apple.png" alt="apple" class="symbol-imgs"  />
-                Continue with apple
+                <img src="../assets/images/apple.png" alt="apple" class="symbol-imgs" />
+                Continue with Apple
               </div>
-          </button>
+            </button>
           </div>
+
           <NuxtLink to="/" class="terms">Terms & conditions</NuxtLink>
         </div>
-        
-      </div>
+      </form>
     </div>
-  </template>
-  
-  
-  <script setup>
-  
-  </script>
-  
-  <style lang="css" scoped>
+  </div>
+</template>
+
+
+<script setup lang="ts">
+import { reactive, ref } from 'vue'
+
+// Define reactive form state and error messages
+const form = reactive({
+  email: ''
+})
+
+const errors = reactive({
+  email: ''
+})
+
+const loading = ref(false) // To manage loading state of the form
+
+// Function to handle form submission
+const onSubmit = () => {
+  // Clear any previous errors
+  errors.email = ''
+
+  // Validate email before submission
+  if (!form.email) {
+    errors.email = 'Email is required.'
+    //after 3 seconds, clear the error message
+    setTimeout(() => {
+      errors.email = ''
+    }, 3000)
+  } else if (!isValidEmail(form.email)) {
+    errors.email = 'Invalid email address.'
+    //after 3 seconds, clear the error message
+    setTimeout(() => {
+      errors.email = ''
+    }, 3000)
+  } else {
+    // If form is valid, simulate submission process
+    loading.value = true
+    setTimeout(() => {
+      loading.value = false
+      console.log('Form submitted successfully:', form)
+    }, 1000)
+  }
+}
+
+// Email validation utility function
+const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(email)
+}
+
+// Function to validate email input as user types
+const validateEmail = () => {
+  if (!isValidEmail(form.email)) {
+    errors.email = 'Invalid email format.'
+  } else {
+    errors.email = ''
+  }
+}
+
+// Handlers for social login buttons (you can replace them with actual logic)
+const handleGoogleLogin = () => {
+  console.log('Google login clicked')
+}
+
+const handleFacebookLogin = () => {
+  console.log('Facebook login clicked')
+}
+
+const handleAppleLogin = () => {
+  console.log('Apple login clicked')
+}
+</script>
+
+
+<style lang="css" scoped>
     
     h1{
       font-size: 0.85rem; 
@@ -179,7 +251,7 @@
       }
   
       .enter-button {
-        width: 90%;
+        width: 80%;
         padding: 0.5rem 1rem;
         background: black;
         color: white;
@@ -190,9 +262,16 @@
         transition: background-color 0.3s;
         cursor: pointer;
         margin: 0.75rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .enter-button{
+        width: 90%;
+
       }
       .enter-button:hover {
-        background-color: #4a5568;
+        background-color: #52575e;
       }
   
       .symbol-imgs{
@@ -227,6 +306,16 @@
         font-size: small;
         margin-top: 1rem;
       }
+
+      .input-error {
+  border-color: red;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.85em;
+  margin-top: 5px;
+}
   
   </style>
   
