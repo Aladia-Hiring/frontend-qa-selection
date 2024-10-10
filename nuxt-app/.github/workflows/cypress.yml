@@ -1,0 +1,28 @@
+name: Cypress E2E with Chromatic Visual Regression
+
+on:
+  pull_request:  
+
+jobs:
+  cypress_visual_regression:
+    name: Cypress E2E + Chromatic Visual Regression
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21'  
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Cypress E2E with Chromatic Visual Regression
+        run: |
+          ELECTRON_EXTRA_LAUNCH_ARGS=--remote-debugging-port=9222 npx cypress run
+          npx chromatic --cypress --project-token=chpt_3449a3dd23537f5

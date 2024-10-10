@@ -55,7 +55,7 @@ export default {
     async login() {
       console.log("Logging in with email:", this.email);
       if (this.email !== "") {
-        this.$emit('login', this.email); // Emit the email to the parent component
+        this.$emit('login', this.email); 
       }
     },
     checkEmailExists(email) {

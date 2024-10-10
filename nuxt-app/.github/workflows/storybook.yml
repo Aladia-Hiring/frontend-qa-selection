@@ -1,0 +1,26 @@
+name: Storybook Visual Regression with Chromatic
+
+on:
+  pull_request:  
+
+jobs:
+  storybook_visual_regression:
+    name: Storybook Visual Regression
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21' 
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Chromatic for Storybook Visual Regression
+        run: npx chromatic --project-token=chpt_956ffde6d87d33a
