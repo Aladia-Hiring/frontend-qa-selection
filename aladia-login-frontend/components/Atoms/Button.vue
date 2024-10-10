@@ -5,7 +5,7 @@
       @click="$emit('click')"
     >
       <slot></slot>
-    </button>
+</button>
   </template>
   
   <script>

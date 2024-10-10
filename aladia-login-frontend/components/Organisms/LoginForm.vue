@@ -1,8 +1,13 @@
 <template>
-    <div class="flex items-center justify-center min-h-screen bg-gray-900">
       <div class="bg-black bg-opacity-75 p-8 rounded-lg shadow-md w-full max-w-md">
         <WelcomeHeader />
-        <InputField id="email" label="Email" placeholder="Email Address" v-model="email" />
+        <InputField 
+        label="Email"
+        placeholder="Email Address" 
+        v-model="parentModel" 
+        inputType="email"
+        type = "email"
+        />
         
         <div class="mb-6">
           <Button @click="handleSubmit">Enter</Button>
@@ -14,15 +19,19 @@
           <a href="#" class="text-gray-400 text-sm hover:text-gray-300">Terms & Conditions</a>
         </div>
       </div>
-    </div>
+
   </template>
   
   <script>
-  import InputField from './InputField.vue';
-  import Button from './Button.vue';
-  import WelcomeHeader from './WelcomeHeader.vue';
-  import SocialMediaButtons from './SocialMediaButtons.vue';
-  
+  import InputField from '../Atoms/InputField.vue';
+  import Button from '../Atoms/Button.vue';
+  import WelcomeHeader from '../Molecules/WelcomeHeader.vue';
+  import SocialMediaButtons from '../Molecules/SocialMediaButtons.vue';
+  import { ref } from 'vue';
+   
+  const parentModel = ref(null);
+
+
   export default {
     components: {
       InputField,
@@ -37,8 +46,9 @@
     },
     methods: {
       handleSubmit() {
-        if (this.email && !this.error) {
-          this.$router.push({ path: '/signup', query: { email: this.email } });
+        console.log(parentModel.value, "ssss");
+        if (parentModel.value && !this.error) {
+          this.$router.push({ path: '/signup', query: { email: parentModel.value } });
         }
       },
     },

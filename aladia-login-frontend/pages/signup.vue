@@ -3,7 +3,7 @@
 
     <div class="bg-gray-950 bg-opacity-80 p-8 rounded-lg shadow-md w-full max-w-md">
       
-      <SignupForm />
+      <SignupForm :email="email" @submit="handleSubmit" />
     
     </div>
   </div>
@@ -21,11 +21,19 @@ export default {
     SocialMediaButtons,
     SignupForm
   },
+
+
   data() {
       return {
         email: this.$route.query.email || '',
       };
     },
+    props: {
+    email: {
+      type: String,
+      default: '',
+    },
+  },
   methods: {
     handleSubmit() {
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
